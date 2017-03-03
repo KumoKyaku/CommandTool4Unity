@@ -10,7 +10,9 @@ using System.Text;
 public class CommandTool : MonoBehaviour
 {
     [Tooltip("按 ` 键开启和关闭")]
-    public bool isShow = false;
+    public KeyCode OpenKey = KeyCode.BackQuote;
+
+    public static bool IsShow { get; protected set; }
 
     [SerializeField]
     private GameObject template;
@@ -87,14 +89,14 @@ public class CommandTool : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.BackQuote))
+        if (Input.GetKeyDown(OpenKey))
         {
-            isShow = !isShow;
+            IsShow = !IsShow;
         }
 
-        if (CmdCanvas && CmdCanvas.isActiveAndEnabled != isShow)
+        if (CmdCanvas && CmdCanvas.isActiveAndEnabled != IsShow)
         {
-            CmdCanvas.gameObject.SetActive(isShow);
+            CmdCanvas.gameObject.SetActive(IsShow);
 
         }
     }
