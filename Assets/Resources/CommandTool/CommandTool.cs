@@ -17,9 +17,20 @@ public class CommandTool : MonoBehaviour
     [SerializeField]
     private GameObject template;
 
-    public CmdCanvas CmdCanvas;
+    private static CommandTool instance;
+
+    private CmdCanvas cmdCanvas;
     private void Awake()
     {
+        if (instance)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+
         ConfirmConsoleUI();
     }
 
@@ -112,5 +123,33 @@ public class CommandTool : MonoBehaviour
         {
             return onCommit;
         }
+    }
+
+    public static CommandTool Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    public CmdCanvas CmdCanvas
+    {
+        get
+        {
+            return cmdCanvas;
+        }
+
+        set
+        {
+            cmdCanvas = value;
+        }
+    }
+
+
+    public static void Clear()
+    {
+        Instance.showText = new StringBuilder();
+        Instance.CmdCanvas.CmdShowText.text = Instance.showText.ToString();
     }
 }
