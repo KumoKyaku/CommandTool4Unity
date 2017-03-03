@@ -9,6 +9,7 @@ using System.Text;
 
 public class CommandTool : MonoBehaviour
 {
+    [Tooltip("按 ` 键开启和关闭")]
     public bool isShow = false;
 
     [SerializeField]
